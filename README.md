@@ -2,7 +2,7 @@
 # Useful Scripts
 This is a collection of useful scripts which showcase some of my abilities 
 
-# Kubernetes
+# Self-hosted Kubernetes on VMs
 | Name      | Description |
 | ----------- | ----------- |
 | MultiPassKubernetesCluster | Self hosted kubernetes cluster on mac with MultiPass |
