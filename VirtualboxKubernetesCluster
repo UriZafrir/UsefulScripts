@@ -1,0 +1,96 @@
+#windows with virtualbox
+Vagrant.configure("2") do |config|
+    config.vm.box_download_insecure=true
+    (2..3).each do |i|
+        config.vm.define "vm-#{i}" do |kb|
+            kb.vm.box = "generic/ubuntu2204"
+            if i==2
+                kb.vm.hostname = "master-node"  
+            end
+            if i==3
+                kb.vm.hostname = "worker1"
+            end
+            kb.vm.network "private_network", ip: "192.168.50.#{i}"
+            kb.vm.provider "virtualbox" do |vb|
+                vb.memory = "2048"
+                vb.name="vm-#{i}"
+                vb.cpus = 2
+            end
+        end
+    end
+end
+#this is the bash script.sh
+
+#run it as sudo in each host, stop in line 83 for worker
+#!/bin/bash
+#https://www.linuxtechi.com/install-kubernetes-on-ubuntu-22-04/
+
+apt update
+apt install net-tools
+
+#add ip to hosts
+tee /etc/hosts <<EOF
+192.168.50.2 master-node
+192.168.50.3 worker1
+EOF
+
+#swap off
+swapoff -a 
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+#containerd modules
+tee /etc/modules-load.d/containerd.conf <<EOF
+overlay
+br_netfilter
+EOF
+modprobe overlay 
+modprobe br_netfilter 
+
+#kubernetes config
+tee /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+sysctl --system
+
+#containerd install
+apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates 
+install -m 0755 -d /etc/apt/keyrings  
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  gpg --dearmor -o /etc/apt/keyrings/docker.gpg  
+chmod a+r /etc/apt/keyrings/docker.gpg 
+echo \
+ "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+ "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt update 
+apt install -y containerd.io
+
+
+#configure containerd to use systemd
+containerd config default |  tee /etc/containerd/config.toml >/dev/null 2>&1 
+sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml 
+systemctl restart containerd 
+systemctl enable containerd
+
+#kubernetes install
+curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg 
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" |  tee /etc/apt/sources.list.d/kubernetes.list 
+apt-get update 
+apt-get install -y kubelet kubeadm kubectl 
+apt-mark hold kubelet kubeadm kubectl
+
+#stop here for worker
+
+#init
+kubeadm init --control-plane-endpoint=master-node
+
+#create kubeconfig
+mkdir -p $HOME/.kube 
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config 
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+#check
+kubectl cluster-info
+#kubectl get nodes
+
