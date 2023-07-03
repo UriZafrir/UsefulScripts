@@ -1,0 +1,11 @@
+#This script disables all users who have never logged in
+Import-Module ActiveDirectory
+
+# Get all user accounts that have never logged in
+$neverLoggedOnUsers = Get-ADUser -Filter {(LastLogonDate -notlike "*") -and (Enabled -eq $true)}
+
+# Disable each user account that has never logged in
+foreach ($user in $neverLoggedOnUsers) {
+    Disable-ADAccount $user
+    Write-Host "Disabled user account $($user.SamAccountName)"
+}
