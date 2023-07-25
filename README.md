@@ -21,5 +21,6 @@ This is a collection of useful scripts which showcase some of my abilities
 | ADGenerateRandomPasswordForUsers.ps1 | Active directory script which generates a random password for all users from a list |
 | WindowsDeleteFilesOlderThan90Days.ps1 | short snippet to auto delete files in folder older than 90 days. To be used with Task Scheduler |
 | ADDisableUsersAndDeleteUsersAfter90Days | disable users after 90 days of inactivity, delete users who are disabled for 90 days |
+| ADGetHotfixVersionForAllConnectedComputers | get hotfix version for all connected computers to DC |
 
 
