@@ -1,0 +1,26 @@
+$inactiveDays = [DateTime]::Today.AddDays(-90)
+
+# Define the search base for the Active Directory query
+$searchBase = "OU=XXXX,DC=XXXX,DC=XXXX"
+
+# Get a list of inactive user accounts
+$inactiveUsers = Get-ADUser -Filter '(Enabled -eq $true -and PasswordNeverExpires -eq $false) -and (PasswordLastSet -lt $inactiveDays -or LastLogonTimestamp -lt $inactiveDays)' -Properties PasswordLastSet,LastLogonTimestamp,SamAccountName 
+#$inactiveUsers
+
+$inactiveDisabledUsers = Get-ADUser -Filter '(Enabled -eq $false -and PasswordNeverExpires -eq $false) -and (PasswordLastSet -lt $inactiveDays -or LastLogonTimestamp -lt $inactiveDays)' -Properties PasswordLastSet,LastLogonTimestamp,SamAccountName 
+#$inactiveDisabledUsers
+
+
+# Disable inactive user accounts which are disabled more than 90 days
+foreach ($user in $inactiveUsers) {
+    Write-Host "Disabling user account: $($user.SamAccountName)"
+#    Disable-ADAccount -Identity $user
+}
+
+
+# Delete disabled user accounts which are disabled more than 90 days
+foreach ($user in $inactiveUsers) {
+    Write-Host "deleting user account: $($user.SamAccountName)"
+#    Remove-ADUser -Identity $user
+}
+#> 
