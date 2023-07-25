@@ -1,0 +1,7 @@
+$boxlist = Get-ADComputer -filter *
+$creds = Get-Credential DOMAIN\USER
+$session = New-PSSession -ComputerName $boxlist.name -Credential $creds
+$result = Invoke-Command -Session $session -ScriptBlock { Get-HotFix }
+# Specify the file path where you want to save the output
+$outputFilePath = "C:\output.csv"
+$result | Out-File -FilePath $outputFilePath
