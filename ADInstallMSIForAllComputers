@@ -20,3 +20,4 @@ $computers | ForEach-Object {
         param ($cmd)
         Start-Process -FilePath "msiexec.exe" -ArgumentList $cmd -Wait
     } -ArgumentList $msiCommand
+}
