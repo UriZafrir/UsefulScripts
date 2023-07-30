@@ -1,0 +1,22 @@
+# Define the target OU
+$targetOU = "OU=xxx,DC=xxx,DC=xxx"
+
+# Get a list of all computers in the target OU
+$computers = Get-ADComputer -SearchBase $targetOU -Filter *
+
+# Define the MSI installation command
+$msiCommand = 'msiexec /q /i "\\xxx\xxx\xxx.msi"'
+
+# Credentials of the privileged user (replace with actual username and password)
+$privilegedUser = "username"
+$securePassword = ConvertTo-SecureString "password" -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential($privilegedUser, $securePassword)
+
+# Run the MSI installation command on each computer using Invoke-Command with credentials
+$computers | ForEach-Object {
+    $computerName = $_.Name
+    Write-Host "Connecting to $computerName"
+    Invoke-Command -ComputerName $computerName -Credential $credential -ScriptBlock {
+        param ($cmd)
+        Start-Process -FilePath "msiexec.exe" -ArgumentList $cmd -Wait
+    } -ArgumentList $msiCommand
