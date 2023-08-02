@@ -1,4 +1,4 @@
-https://www.serveracademy.com/blog/enable-psremoting-with-group-policy/
+#https://www.serveracademy.com/blog/enable-psremoting-with-group-policy/
 
 # Script to check, activate in domain controller
 # Define the target OU
