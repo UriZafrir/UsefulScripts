@@ -1,4 +1,6 @@
 #https://www.serveracademy.com/blog/enable-psremoting-with-group-policy/
+#create a gpo, link it to domain, and change 3 things in the link below. could be done with a script
+New-GPO –Name "xxx" –StarterGpoName "xxx" | New-GPLink –target "dc=Contoso,dc=com" –LinkEnabled yes
 
 # Script to check, activate in domain controller
 # Define the target OU
@@ -15,3 +17,6 @@ foreach ($computer in $computers) {
     Enter-PSSession -ComputerName $computerName
     hostname
 }
+
+#refresh GPO on all computers in domain
+Get-ADComputer –filter * -Searchbase "cn=computers, dc=Contoso,dc=com" | foreach{ Invoke-GPUpdate –computer $_.name -force}
