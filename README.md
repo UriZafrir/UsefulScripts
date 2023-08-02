@@ -23,6 +23,6 @@ This is a collection of useful scripts which showcase some of my abilities
 | ADDisableUsersAndDeleteUsersAfter90Days | disable users after 90 days of inactivity, delete users who are disabled for 90 days |
 | ADGetHotfixVersionForAllConnectedComputers | get hotfix version for all connected computers to DC |
 | ADInstallMSIForAllComputers | Installs MSI for all computers in active domain |
-| AD-GPO-ActivatePowershellRemortingAndCheck | create GPO to Activate powershell remoting and script to check if it's working |
+| AD-GPO-ActivatePowershellRemortingAndCheck.ps1 | create GPO to Activate powershell remoting and script to check if it's working |
 
 
