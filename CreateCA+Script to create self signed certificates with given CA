@@ -1,0 +1,63 @@
+#first create CA
+#!/bin/bash
+
+# Generate private key for CA
+openssl genpkey -algorithm RSA -out ca.key
+
+# Generate self-signed certificate for CA
+openssl req -new -x509 -key ca.key -out ca.crt -days 3650
+
+
+
+
+
+#this is the script to create the self signed certificates and sign them with the CA created earlier:
+#!/bin/bash
+
+# Function to validate Common Name against regex pattern
+validate_common_name() {
+    local pattern="^[^.][A-Za-z0-9.-]+\.([A-Za-z]{2,}|(org|net|com|gov|tv|me|ai|idf|se|ru|hu|io|pt)\.il)$"
+    if [[ ! $1 =~ $pattern ]]; then
+        echo "The input is not valid. It must be in the pattern of *.domain.com or sub.domain.com"
+        return 1
+    fi
+    return 0
+}
+
+# Prompt for the Common Name until a valid input is given
+while true; do
+    read -p "Enter Common Name for the certificate: " COMMON_NAME
+    if [[ -z $COMMON_NAME ]]; then
+        echo "Error: Common Name cannot be empty."
+    elif ! validate_common_name "$COMMON_NAME"; then
+        continue
+    else
+        break
+    fi
+done
+
+# Create a directory for the certificate files
+CERT_DIR="${COMMON_NAME}_cert"
+VALID_DAYS=3650
+mkdir -p "$CERT_DIR"
+
+# Generate private key for the certificate
+openssl genpkey -algorithm RSA -out "$CERT_DIR/${COMMON_NAME}.key"
+
+# Generate certificate signing request
+openssl req -new -key "$CERT_DIR/${COMMON_NAME}.key" -out "$CERT_DIR/${COMMON_NAME}.csr" -subj "/CN=${COMMON_NAME}"
+
+# Sign the certificate with the CA
+openssl x509 -req -in "$CERT_DIR/${COMMON_NAME}.csr" -CA "ca.crt" -CAkey "ca.key" -CAcreateserial -out "$CERT_DIR/${COMMON_NAME}.crt" -days "$VALID_DAYS"
+
+# Create .pem file (certificate + private key)
+cat "$CERT_DIR/${COMMON_NAME}.crt" "$CERT_DIR/${COMMON_NAME}.key" > "$CERT_DIR/${COMMON_NAME}.pem"
+
+# Create .cer file (certificate only)
+openssl x509 -inform PEM -in "$CERT_DIR/${COMMON_NAME}.crt" -outform DER -out "$CERT_DIR/${COMMON_NAME}.cer"
+
+# Create .pfx file (PKCS#12 format, includes certificate and private key)
+openssl pkcs12 -export -out "$CERT_DIR/${COMMON_NAME}.pfx" -inkey "$CERT_DIR/${COMMON_NAME}.key" -in "$CERT_DIR/${COMMON_NAME}.crt"
+
+echo "Certificate generated successfully in '$CERT_DIR' folder."
+
