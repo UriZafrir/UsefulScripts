@@ -1,0 +1,26 @@
+ # Configuration
+$smtpServer = "xxx.xxx.xxx.xxx"
+$fromEmail = "xxx@xxx.co.il"
+$toEmail = "xxx@xxx.co.il"
+$LogFilePath = "C:\AD-check-group.txt"
+$subject = "Group Status"
+
+# Group to check
+$groupName = "xxx"
+
+# Check the number of members in the group
+$groupMembers = Get-ADGroupMember -Identity $groupName
+$memberCount = $groupMembers.Count
+
+# Check if member count is greater than 0
+if ($memberCount -gt 0) { 
+    $emailBody = "The '$groupName' group contains $memberCount members."
+    Send-MailMessage -SmtpServer $smtpServer -From $FromEmail -To $toEmail -Subject $subject -Body $emailBody
+    $logMessage = "Email sent to: $ToEmail on $(Get-Date)"
+    Add-content -Path $LogFilePath -Value $logMessage
+    
+} else {
+    $logMessage = "No members in the group"
+    Add-content -Path $LogFilePath -Value $logMessage
+}
+ 
