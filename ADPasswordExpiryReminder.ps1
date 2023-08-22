@@ -1,6 +1,7 @@
 # Set the email parameters
 $SMTPServer = "xxx.xxx.xxx.xxx"
 $FromEmail = "noreply@xxxxxx.co.il"
+$ErrorToEmail = "xxx@xxxx.co.il"
 $LogFilePath = "C:\email-password-expiry-link\log.txt"
 $Subject = "Password Expiry Reminder"
 $BodyTemplate = @"
@@ -54,7 +55,7 @@ foreach ($user in $users) {
     } catch {
         $subj = "Password Reset Script Error On User: $($user.Name)"
         $msg = "There was an error sending the password reset for the user: $($user.Name)`n The Error: $($_.Exception.Message)"
-        Send-MailMessage -SmtpServer $SMTPServer -From $FromEmail -To "host@matrix.co.il" -Subject $subj -Body $msg
+        Send-MailMessage -SmtpServer $SMTPServer -From $FromEmail -To $ErrorToEmail -Subject $subj -Body $msg
 
         # Log the error
         $logMessage = "Error sending email to: $ToEmail on $(Get-Date)`nError Message: $($_.Exception.Message)"
