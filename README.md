@@ -25,5 +25,6 @@ This is a collection of useful scripts which showcase some of my abilities
 | ADGetHotfixVersionForAllConnectedComputers | get hotfix version for all connected computers to DC |
 | ADInstallMSIForAllComputers | Installs MSI for all computers in active domain |
 | AD-GPO-ActivatePowershellRemortingAndCheck.ps1 | create GPO to Activate powershell remoting and script to check if it's working |
+| ADCheckUsersInGroupAndNotify| Check number of users in group and send email on condition |
 
 
