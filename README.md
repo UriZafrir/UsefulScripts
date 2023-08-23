@@ -2,19 +2,19 @@
 # Useful Scripts
 This is a collection of useful scripts which showcase some of my abilities 
 
-# Self-hosted Kubernetes on VMs
+## Self-hosted Kubernetes on VMs
 | Name      | Description |
 | ----------- | ----------- |
 | [MultiPassKubernetesCluster](./MultiPassKubernetesCluster) | Self hosted kubernetes cluster on mac with MultiPass |
 | [Vagrant-Virtualbox-KubernetesCluster](./Vagrant-Virtualbox-KubernetesCluster) | Self hosted kubernetes cluster on windows with Vagrant and virtualbox |
 
-# Bash
+## Bash
 | Name      | Description |
 | ----------- | ----------- |
 | [GetWordpressVersionForAllWebsites](./GetWordpressVersionForAllWebsites) | Bash script which outputs wordpress version information for each website in /var/www |
 | [CreateCA+Script-to-create-self-signed-certificates-with-given-CA](./CreateCA+Script-to-create-self-signed-certificates-with-given-CA) | Tool for creating self signed certificates from own certificate authority |
 
-# Active Directory
+## Active Directory
 | Name      | Description |
 | ----------- | ----------- |
 | [ADPasswordExpiryReminder](./ADPasswordExpiryReminder) | Active directory script which queries users' password expiry date and sends them an email 7,5,3,1 days before it's expiry |
