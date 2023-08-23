@@ -12,7 +12,7 @@ This is a collection of useful scripts which showcase some of my abilities
 | Name      | Description |
 | ----------- | ----------- |
 | [GetWordpressVersionForAllWebsites](./GetWordpressVersionForAllWebsites) | Bash script which outputs wordpress version information for each website in /var/www |
-| [CreateCA+Script to create self signed certificates with given CA](./CreateCA+Script to create self signed certificates with given CA) | Tool for creating self signed certificates from own certificate authority |
+| [CreateCA+Script-to-create-self-signed-certificates-with-given-CA](./CreateCA+Script-to-create-self-signed-certificates-with-given-CA) | Tool for creating self signed certificates from own certificate authority |
 
 # Active Directory
 | Name      | Description |
