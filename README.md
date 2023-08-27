@@ -8,6 +8,12 @@ This is a collection of useful scripts which showcase some of my abilities
 | [MultiPassKubernetesCluster](./Kubernetes/MultiPassKubernetesCluster) | Self hosted kubernetes cluster on mac with MultiPass |
 | [Vagrant-Virtualbox-KubernetesCluster](./Kubernetes/Vagrant-Virtualbox-KubernetesCluster) | Self hosted kubernetes cluster on windows with Vagrant and virtualbox |
 
+## Terraform
+| Name      | Description |
+| ----------- | ----------- |
+| [AWS Kubernetes Cluster with EKS](./Terraform/AWS-EKS-Cluster) | kubernetes cluster on AWS EKS with terraform |
+
+
 ## Bash
 | Name      | Description |
 | ----------- | ----------- |
