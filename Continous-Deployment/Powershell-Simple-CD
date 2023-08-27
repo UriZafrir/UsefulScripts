@@ -8,8 +8,11 @@ $BRANCH_NAME = "main"  # Branch to deploy
 # Clone or update the repository to the deployment directory
 if (Test-Path $DEPLOY_DIR) {
     Write-Host "Updating existing deployment..."
+    git init "$DEPLOY_PATH"
     Set-Location -Path $DEPLOY_DIR
-    git pull origin $BRANCH_NAME
+    git remote add origin "$REPO_URL"
+    git fetch origin "$BRANCH_NAME"
+    git pull origin "$BRANCH_NAME"
 } else {
     Write-Host "Cloning repository..."
     git clone $REMOTE_REPO -b $BRANCH_NAME $DEPLOY_DIR

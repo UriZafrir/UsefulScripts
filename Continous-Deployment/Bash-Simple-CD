@@ -13,21 +13,19 @@ if ! command -v git &> /dev/null; then
     exit 1
 fi
 
-# Clone or update the repository
-if [ -d "$DEPLOY_PATH" ]; then
-    echo "Updating existing repository..."
+# Initialize a new repository if necessary
+if [ ! -d "$DEPLOY_PATH/.git" ]; then
+    echo "Initializing a new repository..."
+    git init "$DEPLOY_PATH"
     cd "$DEPLOY_PATH"
+    git remote add origin "$REPO_URL"
+    git fetch origin "$BRANCH_NAME"
     git pull origin "$BRANCH_NAME"
 else
-    echo "Cloning repository..."
-    git clone "$REPO_URL" -b "$BRANCH_NAME" "$DEPLOY_PATH"
+    echo "Repository already exists."
     cd "$DEPLOY_PATH"
+    git pull origin "$BRANCH_NAME"
 fi
-
-# Delete .git files and .gitignore
-echo "Deleting .git files and .gitignore..."
-find . -name ".git*" -exec rm -rf {} \;
-find . -name ".gitignore" -exec rm -f {} \;
 
 # Perform deployment tasks
 # Replace these lines with your deployment logic
