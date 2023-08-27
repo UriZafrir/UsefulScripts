@@ -19,8 +19,8 @@ This is a collection of useful scripts which showcase some of my abilities
 ## Continuous Delivery
 | Name      | Description |
 | ----------- | ----------- |
-| [Bash-Simple-CD](./Terraform/Bash-Simple-CD) | Bash-Simple-CD |
-| [Powershell-Simple-CD](./Terraform/Powershell-Simple-CD) | Powershell-Simple-CD |
+| [Bash-Simple-CD](./Continuous-Deployment/Bash-Simple-CD) | Bash-Simple-CD |
+| [Powershell-Simple-CD](./Continuous-Deployment/Powershell-Simple-CD) | Powershell-Simple-CD |
 
 
 
