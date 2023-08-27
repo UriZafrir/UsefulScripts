@@ -13,6 +13,7 @@ This is a collection of useful scripts which showcase some of my abilities
 | ----------- | ----------- |
 | [AWS Kubernetes Cluster with EKS](./Terraform/AWS-EKS-Cluster) | kubernetes cluster on AWS EKS with terraform |
 | [VMware Vsphere VMs creation](./Terraform/VMware-vSphere-VMs-Creation) | kubernetes cluster on AWS EKS with terraform |
+| [Rancher-vSphere](./Terraform/Rancher-vSphere) | Rancher cluster on vSphere |
 
 
 ## Bash
