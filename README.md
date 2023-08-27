@@ -12,6 +12,7 @@ This is a collection of useful scripts which showcase some of my abilities
 | Name      | Description |
 | ----------- | ----------- |
 | [AWS Kubernetes Cluster with EKS](./Terraform/AWS-EKS-Cluster) | kubernetes cluster on AWS EKS with terraform |
+| [VMware Vsphere VMs creation](./Terraform/VMware-vSphere-VMs-Creation) | kubernetes cluster on AWS EKS with terraform |
 
 
 ## Bash
