@@ -1,7 +1,5 @@
 # terraform-vsphere-rancher
 
-![Apache 2.0 Licence](https://img.shields.io/hexpm/l/plug.svg) ![Terraform](https://img.shields.io/badge/terraform->=0.15-green.svg)
-
 Terraform module that manages Kubernetes clusters through an existing [rancher server](https://rancher.com/docs/rancher/v2.5/en/).
 
 ## Prerequisites
@@ -225,18 +223,3 @@ module "rancher_k8s" {
 }
 ```
 
-## Persistent storage
-
-In order to enable persistent storage, please [read CSI/CPI documentation](docs/csi/persistent_storage_with_csi_driver.md)
-
-## Versioning
-
-For the versions available, see the [tags on this repository](https://github.com/scalair/terraform-rancher-vsphere/tags).
-
-Additionaly you can see what change in each version in the [CHANGELOG.md](CHANGELOG.md) file.
-
-## Authors
-
-- **blakelead** - [blakelead](https://github.com/blakelead)
-- **xat** - [xat](https://github.com/Xat59)
-- **scalair** - [Scalair](https://github.com/scalair)
