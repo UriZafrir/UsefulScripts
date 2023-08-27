@@ -7,7 +7,7 @@ This is a collection of useful scripts which showcase some of my abilities
 | ----------- | ----------- |
 | [MultiPassKubernetesCluster](./Kubernetes/MultiPassKubernetesCluster) | Self hosted kubernetes cluster on mac with MultiPass |
 | [Vagrant-Virtualbox-KubernetesCluster](./Kubernetes/Vagrant-Virtualbox-KubernetesCluster) | Self hosted kubernetes cluster on windows with Vagrant and virtualbox |
-| [Local-Rancher-With-Vagrant](./Kubernetes/Local-Rancher-With-Vagrant) | Self hosted kubernetes cluster on windows with Vagrant and virtualbox |
+| [Local-Rancher-With-Vagrant](./Kubernetes/Local-Rancher-With-Vagrant) | Local Rancher with Vagrant |
 
 ## Terraform
 | Name      | Description |
