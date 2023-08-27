@@ -1,26 +1,41 @@
 #!/bin/bash
 
-# Bash script for Continuous Deployment from Git repository
+# Continuous Deployment Script
 
 # Define variables
-DEPLOY_DIR="/path/to/web/root"           # Directory where you want to deploy the files
-NON_PUBLIC_REPO="/path/to/non/public"    # Non-public directory for repository clone
-REMOTE_REPO="https://github.com/YourUsername/YourRepository.git"  # URL of the remote repository
+REPO_URL="https://github.com/YourUsername/YourRepository.git"
+BRANCH_NAME="main"
+DEPLOY_PATH="/path/to/deployment/directory"
 
-# Clone or update the non-public repository
-if [ -d "$NON_PUBLIC_REPO" ]; then
-    echo "Updating existing repository..."
-    cd "$NON_PUBLIC_REPO"
-    git pull origin master
-else
-    echo "Cloning repository..."
-    git clone "$REMOTE_REPO" "$NON_PUBLIC_REPO"
-    cd "$NON_PUBLIC_REPO"
+# Check if Git is installed
+if ! command -v git &> /dev/null; then
+    echo "Git is not installed. Please install Git before running this script."
+    exit 1
 fi
 
-# Copy files to deployment directory
-echo "Copying files to deployment directory..."
-rsync -av --exclude=".git" --exclude=".gitignore" "$NON_PUBLIC_REPO/" "$DEPLOY_DIR/"
+# Clone or update the repository
+if [ -d "$DEPLOY_PATH" ]; then
+    echo "Updating existing repository..."
+    cd "$DEPLOY_PATH"
+    git pull origin "$BRANCH_NAME"
+else
+    echo "Cloning repository..."
+    git clone "$REPO_URL" -b "$BRANCH_NAME" "$DEPLOY_PATH"
+    cd "$DEPLOY_PATH"
+fi
+
+# Delete .git files and .gitignore
+echo "Deleting .git files and .gitignore..."
+find . -name ".git*" -exec rm -rf {} \;
+find . -name ".gitignore" -exec rm -f {} \;
+
+# Perform deployment tasks
+# Replace these lines with your deployment logic
+echo "Performing deployment tasks..."
+# Your deployment logic here
 
 # Notify successful deployment
 echo "Deployment successful!"
+
+# Exit the script
+exit 0

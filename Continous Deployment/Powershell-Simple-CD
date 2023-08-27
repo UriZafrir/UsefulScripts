@@ -1,24 +1,25 @@
 # PowerShell script for Continuous Deployment from Git repository
 
 # Define variables
-$DEPLOY_DIR = "C:\Path\To\Web\Root"           # Directory where you want to deploy the files
-$NON_PUBLIC_REPO = "C:\Path\To\Non\Public"    # Non-public directory for repository clone
+$DEPLOY_DIR = "C:\Path\To\Web\Root"  # Directory where you want to deploy the files
 $REMOTE_REPO = "https://github.com/YourUsername/YourRepository.git"  # URL of the remote repository
+$BRANCH_NAME = "main"  # Branch to deploy
 
-# Clone or update the non-public repository
-if (Test-Path $NON_PUBLIC_REPO) {
-    Write-Host "Updating existing repository..."
-    Set-Location -Path $NON_PUBLIC_REPO
-    git pull origin master
+# Clone or update the repository to the deployment directory
+if (Test-Path $DEPLOY_DIR) {
+    Write-Host "Updating existing deployment..."
+    Set-Location -Path $DEPLOY_DIR
+    git pull origin $BRANCH_NAME
 } else {
     Write-Host "Cloning repository..."
-    git clone $REMOTE_REPO $NON_PUBLIC_REPO
-    Set-Location -Path $NON_PUBLIC_REPO
+    git clone $REMOTE_REPO -b $BRANCH_NAME $DEPLOY_DIR
+    Set-Location -Path $DEPLOY_DIR
 }
 
-# Copy files to deployment directory
-Write-Host "Copying files to deployment directory..."
-Copy-Item -Recurse -Force -Exclude ".git", ".gitignore" $NON_PUBLIC_REPO\* $DEPLOY_DIR
+# Delete .git and .gitignore files
+Write-Host "Deleting .git and .gitignore files..."
+Remove-Item -Recurse -Force (Join-Path -Path $DEPLOY_DIR -ChildPath ".git")
+Remove-Item -Recurse -Force (Join-Path -Path $DEPLOY_DIR -ChildPath ".gitignore")
 
 # Notify successful deployment
 Write-Host "Deployment successful!"
