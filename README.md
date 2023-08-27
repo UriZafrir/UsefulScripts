@@ -16,6 +16,13 @@ This is a collection of useful scripts which showcase some of my abilities
 | [VMware Vsphere VMs creation](./Terraform/VMware-vSphere-VMs-Creation) | kubernetes cluster on AWS EKS with terraform |
 | [Rancher-vSphere](./Terraform/Rancher-vSphere) | Rancher cluster on vSphere |
 
+## Continuous Delivery
+| Name      | Description |
+| ----------- | ----------- |
+| [Bash-Simple-CD](./Terraform/Bash-Simple-CD) | Bash-Simple-CD |
+| [Powershell-Simple-CD](./Terraform/Powershell-Simple-CD) | Powershell-Simple-CD |
+
+
 
 ## Bash
 | Name      | Description |

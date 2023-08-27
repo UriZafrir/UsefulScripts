@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Bash script for Continuous Deployment from Git repository
+
+# Define variables
+DEPLOY_DIR="/path/to/web/root"           # Directory where you want to deploy the files
+NON_PUBLIC_REPO="/path/to/non/public"    # Non-public directory for repository clone
+REMOTE_REPO="https://github.com/YourUsername/YourRepository.git"  # URL of the remote repository
+
+# Clone or update the non-public repository
+if [ -d "$NON_PUBLIC_REPO" ]; then
+    echo "Updating existing repository..."
+    cd "$NON_PUBLIC_REPO"
+    git pull origin master
+else
+    echo "Cloning repository..."
+    git clone "$REMOTE_REPO" "$NON_PUBLIC_REPO"
+    cd "$NON_PUBLIC_REPO"
+fi
+
+# Copy files to deployment directory
+echo "Copying files to deployment directory..."
+rsync -av --exclude=".git" --exclude=".gitignore" "$NON_PUBLIC_REPO/" "$DEPLOY_DIR/"
+
+# Notify successful deployment
+echo "Deployment successful!"
