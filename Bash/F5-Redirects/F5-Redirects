@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Check if the user provided an input file argument
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <input_file>"
+  exit 1
+fi
+
+# Input and output file paths
+input_file="$1"
+output_file="edited_$(basename "$input_file")"
+
+# Check if the input file exists
+if [ ! -f "$input_file" ]; then
+  echo "Input file not found: $input_file"
+  exit 1
+fi
+
+# Filter lines don't start with "https://" and output to "output_file"
+sed '/^https:/!d' "$input_file" >  "$output_file"
+
+# Remove empty lines
+sed -i '/^$/d' "$output_file"
+
+# Lowercase every line in the input file
+sed -i 's/.*/\L&/' "$output_file"
+
+# Remove "https://www.maccabi4u.co.il" from each line
+sed -i 's|https:\/\/[A-Za-z0-9]\+\(\.[A-Za-z0-9]\+\)\+/|/|g' "$output_file"
+
+# Replace the comma between the URLs with " :- "
+sed -i 's|,|" :- "|' "$output_file"
+
+# Add " in the beginning of each line
+sed -i 's|^|"|' "$output_file" 
+
+# Ensure each line ends with ",
+sed -i 's/,$/"/; s/"$/",/' "$output_file"
+
+# Remove the final comma from the last line in the output file
+awk 'NR > 1 { print prev } { prev = $0 } END { sub(/,$/, "", prev); print prev }' "$output_file" > "${output_file}.tmp" && mv "${output_file}.tmp" "$output_file"
+
+echo "Output written to $output_file"
+
