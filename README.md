@@ -30,6 +30,7 @@ This is a collection of useful scripts which showcase some of my abilities
 | ----------- | ----------- |
 | [GetWordpressVersionForAllWebsites](./Bash/GetWordpressVersionForAllWebsites) | Bash script which outputs wordpress version information for each website in /var/www |
 | [CreateCA+Script-to-create-self-signed-certificates-with-given-CA](./Bash/CreateCA+Script-to-create-self-signed-certificates-with-given-CA) | Tool for creating self signed certificates from own certificate authority |
+| [CreateCA+Script-to-create-self-signed-certificates-with-given-CA](./Bash/F5-Redirects/F5-Redirects) | example for script that changes a file with sed and awk |
 
 ## Active Directory
 | Name      | Description |
