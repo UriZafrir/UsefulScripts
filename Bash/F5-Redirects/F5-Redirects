@@ -17,25 +17,25 @@ if [ ! -f "$input_file" ]; then
 fi
 
 # Filter lines don't start with "https://" and output to "output_file"
-gsed '/^https:/!d' "$input_file" >  "$output_file"
+sed '/^https:/!d' "$input_file" >  "$output_file"
 
 # Remove empty lines
-gsed -i '/^$/d' "$output_file"
+sed -i '/^$/d' "$output_file"
 
 # Lowercase every line in the input file
-gsed -i 's/.*/\L&/' "$output_file"
+sed -i 's/.*/\L&/' "$output_file"
 
 # Remove "https://www.maccabi4u.co.il" from each line
-gsed -i 's|https:\/\/[A-Za-z0-9]\+\(\.[A-Za-z0-9]\+\)\+/|/|g' "$output_file"
+sed -i 's|https:\/\/[A-Za-z0-9]\+\(\.[A-Za-z0-9]\+\)\+/|/|g' "$output_file"
 
 # Replace the comma between the URLs with " :- "
-gsed -i 's|,|" :- "|' "$output_file"
+sed -i 's|,|" :- "|' "$output_file"
 
 # Add " in the beginning of each line
-gsed -i 's|^|"|' "$output_file" 
+sed -i 's|^|"|' "$output_file" 
 
 # Ensure each line ends with ",
-gsed -i 's/,$/"/; s/"$/",/' "$output_file"
+sed -i 's/,$/"/; s/"$/",/' "$output_file"
 
 # Remove the final comma from the last line in the output file
 awk 'NR > 1 { print prev } { prev = $0 } END { sub(/,$/, "", prev); print prev }' "$output_file" > "${output_file}.tmp" && mv "${output_file}.tmp" "$output_file"
