@@ -28,23 +28,25 @@ sed '/^$/d' |
 sed 's/.*/\L&/' |
 #sed 's/.*/\L&/'  > "$output_file"
 
-# Remove "https://www.xxx.co.il" from each line
-sed 's|https://www.xxx.co.il||g' |
-#sed 's|^https://www.xxx.co.il||' > "$output_file"
-#sed 's|https://www.xxx.co.il||g' > "$output_file"
+# Remove "https://www.maccabi4u.co.il" from each line
+sed 's|https://www.maccabi4u.co.il||g' |
+#sed 's|^https://www.maccabi4u.co.il||' > "$output_file"
+#sed 's|https://www.maccabi4u.co.il||g' > "$output_file"
 
 # Replace the comma between the URLs with " :- "
 sed 's|,|" :- "|' |
 #sed 's|,|" :- "|' > "$output_file"
 
 # Add " in the beginning of each line
-sed 's|^|"|' |  
-#sed 's|^|"|'  > "$output_file"
+#sed 's|^|"|' |  
+sed 's|^|"|'  > "$output_file"
 
 #This command will first check for a trailing comma and replace it with " if it exists, and then it will add ", to the end of each line.
 # Ensure each line ends with ",
 #sed 's/,$/"/; s/$/,"/' |
-sed 's|$|",|' > "$output_file"
+#sed 's/,$/"/' > "$output_file"
+#sed 's/,$/"/; s/[^"]$/&"/' > "$output_file"
+
 
 # Filter lines don't start with "https://"
 #sed '/^\//!d' "$input_file" | 
