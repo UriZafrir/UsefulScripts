@@ -21,6 +21,7 @@ This is a collection of useful scripts which showcase some of my abilities
 | ----------- | ----------- |
 | [Bash-Simple-CD](./Continous-Deployment/Bash-Simple-CD) | Bash-Simple-CD | 
 | [Powershell-Simple-CD](./Continous-Deployment/Powershell-Simple-CD) | Powershell-Simple-CD |
+| [Bash-CD](./Continous-Deployment/Bash-CD/deploy.sh) | More ellaborate Bash continuous deployment script |
 
 
 
