@@ -34,8 +34,12 @@ sed -i 's|,|" := "|' "$output_file"
 # Add " in the beginning of each line
 sed -i 's|^|"|' "$output_file" 
 
-# Ensure each line ends with ",
-sed -i 's/,$/"/; s/"$/",/' "$output_file"
+# Ensure each line ends with /",
+# This line makes sure each line not ending with / or , ends with /",
+sed -i 's|[^\/,]$|\/",|' "$output_file"
+# This line makes sure each line ending with //", ends with /",
+sed -i 's|\/\/",$|\/",|' "$output_file"
+
 
 # Remove the final comma from the last line in the output file
 awk 'NR > 1 { print prev } { prev = $0 } END { sub(/,$/, "", prev); print prev }' "$output_file" > "${output_file}.tmp" && mv "${output_file}.tmp" "$output_file"
