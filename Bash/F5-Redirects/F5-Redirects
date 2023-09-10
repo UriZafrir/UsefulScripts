@@ -1,6 +1,9 @@
 #!/bin/bash
+#for debugging:
 #set -x
 #trap read debug
+#and use vim command to auto update file on edit
+#:set autoread | au CursorHold * checktime | call feedkeys("lh")
 
 # Check if the user provided an input file argument
 if [ $# -ne 1 ]; then
