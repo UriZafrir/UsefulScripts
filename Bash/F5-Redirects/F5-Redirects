@@ -1,4 +1,6 @@
 #!/bin/bash
+#set -x
+#trap read debug
 
 # Check if the user provided an input file argument
 if [ $# -ne 1 ]; then
@@ -16,16 +18,22 @@ if [ ! -f "$input_file" ]; then
   exit 1
 fi
 
-# Filter lines don't start with "https://" and output to "output_file"
-sed '/^https:/!d' "$input_file" >  "$output_file"
+#remove carriage returns, this is used to prevent bugs from editing windows files in unix. also creates new file output file
+tr -d '\r' < "$input_file" >  "$output_file"
+
+# Filter lines don't start with "https://"
+sed '/^https:/!d' "$output_file"
 
 # Remove empty lines
 sed -i '/^$/d' "$output_file"
 
+# Remove BOM letters
+sed -i '1s|^\xEF\xBB\xBF||' "$output_file"
+
 # Lowercase every line in the input file
 sed -i 's/.*/\L&/' "$output_file"
 
-# Remove "https://www.maccabi4u.co.il" from each line
+# Remove URLs  from each line
 sed -i 's|https:\/\/[A-Za-z0-9]\+\(\.[A-Za-z0-9]\+\)\+/|/|g' "$output_file"
 
 # Replace the comma between the URLs with " := "
@@ -37,6 +45,10 @@ sed -i 's|^|"|' "$output_file"
 # Ensure each line ends with /",
 # This line makes sure each line not ending with / or , ends with /",
 sed -i 's|[^\/,]$|\/",|' "$output_file"
+# This line makes sure each line ending with / ends with /",
+sed -i 's|\/$|\/",|' "$output_file"
+# This line makes sure each line ending with /, ends with /",
+sed -i 's|\/,$|\/",|' "$output_file"
 # This line makes sure each line ending with //", ends with /",
 sed -i 's|\/\/",$|\/",|' "$output_file"
 
@@ -45,4 +57,3 @@ sed -i 's|\/\/",$|\/",|' "$output_file"
 awk 'NR > 1 { print prev } { prev = $0 } END { sub(/,$/, "", prev); print prev }' "$output_file" > "${output_file}.tmp" && mv "${output_file}.tmp" "$output_file"
 
 echo "Output written to $output_file"
-
