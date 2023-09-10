@@ -28,8 +28,8 @@ sed -i 's/.*/\L&/' "$output_file"
 # Remove "https://www.maccabi4u.co.il" from each line
 sed -i 's|https:\/\/[A-Za-z0-9]\+\(\.[A-Za-z0-9]\+\)\+/|/|g' "$output_file"
 
-# Replace the comma between the URLs with " :- "
-sed -i 's|,|" :- "|' "$output_file"
+# Replace the comma between the URLs with " := "
+sed -i 's|,|" := "|' "$output_file"
 
 # Add " in the beginning of each line
 sed -i 's|^|"|' "$output_file" 
