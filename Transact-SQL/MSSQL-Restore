@@ -8,3 +8,6 @@ USE [DB_NAME]
 ALTER ROLE db_owner ADD MEMBER DB_USER1;
 ALTER ROLE db_owner ADD MEMBER DB_USER2;
 GO
+
+-- in the case where the user is orphaned, meaning it appears in the DB but not in the security-logins use this:
+-- alter user DB_USER with login = DB_USER
