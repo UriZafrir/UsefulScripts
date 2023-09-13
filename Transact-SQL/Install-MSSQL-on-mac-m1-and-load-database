@@ -1,22 +1,29 @@
-#install docker then:
+#install docker, then:
 
+#pull container
 docker pull mcr.microsoft.com/azure-sql-edge
 
+#run it, replace password
 docker run --name sql_server_test -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=xxxxx' -p 1433:1433 mcr.microsoft.com/azure-sql-edge
 
+#install mssql cli
 sudo npm install -g sql-cli
 
+#log in as sa
 mssql -u sa -p xxxxx
 
 #after successfully logging in check out the databases
 SELECT name, database_id, create_date  FROM sys.databases;
 
-#if you have the database file .mdf file, copy it to the container or download it.
-for example inside container:
+#if you have the database file .mdf file, copy it to the container or download it. 
+#for example, run inside container:
+
 #choose folder
 cd /tmp
+
 #download file
 wget https://github.com/MuhammadBilalYar/Transact-SQL-Queries/raw/master/Sample%20Database/AdventureWorksLT2012_Data.mdf
+
 #check it's downloaded
 ls | grep Adventure
 
