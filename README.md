@@ -50,7 +50,6 @@ This is a collection of useful scripts which showcase some of my abilities
 | ----------- | ----------- |
 | [MSSQL-Backup](./Transact-SQL/MSSQL-Backup) | Transact-SQL snippet to backup database from file |
 | [MSSQL-Restore](./Transact-SQL/MSSQL-Restore) | Transact-SQL code to terminate existing connections to the database, restore database from file, and set back permissions to users  |
-
 | [Install MSSQL on Mac M1 and load-database](./Transact-SQL/Install-MSSQL-on-mac-m1-and-load-database) | Use Docker to install MSSQL on Mac M1 and load-database .mdf file to new database  |
 
 
