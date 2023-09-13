@@ -24,8 +24,6 @@ This is a collection of useful scripts which showcase some of my abilities
 | [Bash-CD](./Continous-Deployment/Bash-CD/deploy.sh) | More ellaborate Bash continuous deployment script |
 
 
-
-
 ## Bash
 | Name      | Description |
 | ----------- | ----------- |
@@ -47,4 +45,8 @@ This is a collection of useful scripts which showcase some of my abilities
 | [ADCheckUsersInGroupAndNotify](./Powershell/ADCheckUsersInGroupAndNotify) | Check number of users in group and send email on condition |
 | [ADGuiForUsersAndPasswords](./Powershell/ADGuiForUsersAndPasswords) | show users data in table |
 
-
+## Transact-SQL
+| Name      | Description |
+| ----------- | ----------- |
+| [MSSQL-Backup](./Transact-SQL/MSSQL-Backup) | Transact-SQL snippet to backup database from file |
+| [MSSQL-Restore](./Transact-SQL/MSSQL-Restore) | Transact-SQL code to terminate existing connections to the database, restore database from file, and set back permissions to users  |
