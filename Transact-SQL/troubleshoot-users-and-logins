@@ -1,0 +1,32 @@
+/*
+usually production databases use logins to perform actions sent from the frontend
+when updating a database we need to preserve these logins.
+when copying a database from development server to production server users can become orphaned.
+This is a broad topic i'm just touching on it.
+*/
+-- we can view the current sysusers on a db:
+USE [DB]
+SELECT *
+FROM sys.sysusers
+
+-- we can view the logins in our MSSQL
+SELECT *
+FROM sys.sql_logins
+
+-- if a user is in sys.sql_logins and we want to add DBO permission to the login we need to run this code:
+USE [DB]
+--this creates a user in the database for the login:
+CREATE USER [DB_USER] FOR LOGIN [DB_USER]
+-- now it should appear in sys.sysusers, we can check.
+SELECT *
+FROM sys.sysusers
+-- now add the DBO role to the user:
+EXEC sp_addrolemember N'db_owner', N'USER'
+
+-- Sometimes the opposite happens - there is a user in sys.sysusers but the login disappeared. In this case we run:
+alter user DB_USER with login = DB_USER
+-- we can check:
+SELECT *
+FROM sys.sql_logins
+
+
