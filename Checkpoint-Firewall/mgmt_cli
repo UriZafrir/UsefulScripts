@@ -26,8 +26,9 @@ Black_List_409,118.70.113.1,group1
 #bulk add networks
 #https://community.checkpoint.com/t5/API-CLI-Discussion/Management-API-Using-CSV-to-bulk-add-objects-Doubled-Items/m-p/53220#M3454
 mgmt_cli add network --batch test_add.csv
+
+
 #csv should be in this format
 name, comments, subnet, mask-length, color
-
 <nam_1>, <com_1>, <x.x.x.x>>, 16, forest green
 
