@@ -53,5 +53,10 @@ This is a collection of useful scripts which showcase some of my abilities
 | [Install MSSQL on Mac M1 and load-database](./Transact-SQL/Install-MSSQL-on-mac-m1-and-load-database) | Use Docker to install MSSQL on Mac M1 and load-database .mdf file to new database  |
 | [troubleshoot-users-and-logins](./Transact-SQL/troubleshoot-users-and-logins) | troubleshoot common problems with users and logins when updating and operating production databases in MSSQL |
 
+## Checkpoint Firewall 
+| Name      | Description |
+| ----------- | ----------- |
+| [CLI (bulk) add hosts or networks](./Checkpoint-Firewall/mgmt_cli) | Use Checkpoint CLI to mass add hosts or networks |
+
 
 

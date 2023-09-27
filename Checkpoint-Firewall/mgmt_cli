@@ -1,0 +1,33 @@
+#go to firewall gui - go to cli (in that case drop the "mgmt_cli" at the start), or use the command line from the host computer.
+#https://sc1.checkpoint.com/documents/latest/APIs/index.html#tips_best_practices~v1.1%20
+#https://community.checkpoint.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=true&filter=location&location=forum-board:codehub&q=bulk
+
+
+#add new host with group
+#https://sc1.checkpoint.com/documents/latest/APIs/index.html#cli/add-host~v1.1%20
+mgmt_cli add host name "New Host 2" ip-address "192.0.2.2" groups.1 "New Group 1"
+
+
+
+#bulk add hosts
+#https://community.checkpoint.com/t5/forums/searchpage/tab/message?advanced=false&allow_punctuation=true&filter=location&location=forum-board:codehub&q=bulk
+#https://community.checkpoint.com/t5/API-CLI-Discussion/Creating-multiple-object-via-CSV/m-p/3048
+#https://community.checkpoint.com/t5/Management/Trying-to-add-hosts-in-mgmt-cli-using-csv-file/td-p/71060#
+mgmt_cli add host --batch /var/tmp/filename.csv
+
+#csv should be in this format
+name,ip-address,groups
+Black_List_408,104.248.164.231,group1
+Black_List_409,118.70.113.1,group1
+
+
+
+
+#bulk add networks
+#https://community.checkpoint.com/t5/API-CLI-Discussion/Management-API-Using-CSV-to-bulk-add-objects-Doubled-Items/m-p/53220#M3454
+mgmt_cli add network --batch test_add.csv
+#csv should be in this format
+name, comments, subnet, mask-length, color
+
+<nam_1>, <com_1>, <x.x.x.x>>, 16, forest green
+
