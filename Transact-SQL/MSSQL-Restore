@@ -1,12 +1,17 @@
-USE [DB_NAME]
+--restore db
+USE [master]
 ALTER DATABASE [DB_NAME] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-RESTORE DATABASE [DB_NAME] FROM  DISK = N'C:\<DB-FILE-NAME>.bak' WITH  FILE = 1,  MOVE N'xxxAPP' TO N'C:\Program Files\Microsoft SQL Server\MSSQL<number>.MSSQLSERVER\MSSQL\DATA\DB_NAME.mdf',  MOVE N'xxxApp_log' TO N'C:\Program Files\Microsoft SQL Server\MSSQL<number>.MSSQLSERVER\MSSQL\DATA\DB_NAME_log.ldf',  NOUNLOAD,  STATS = 5
-ALTER DATABASE [DB_NAME] SET MULTI_USER;
+RESTORE DATABASE [DB_NAME] FROM  DISK = N'D:\Temp\2023.09.27.AvaodataApp.bak' WITH  FILE = 1,  MOVE N'AvodataApp' TO N'D:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\DB_NAME.mdf',  MOVE N'AvodataApp_log' TO N'D:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\DB_NAME_log.ldf',  NOUNLOAD, REPLACE,  STATS = 5
+-- is this needed?
+-- ALTER DATABASE [DB_NAME] SET MULTI_USER;
 GO
 
+-- then return dbo permissions to users DB_USER1 + DB_USER2
 USE [DB_NAME]
-ALTER ROLE db_owner ADD MEMBER DB_USER1;
-ALTER ROLE db_owner ADD MEMBER DB_USER2;
+CREATE USER [DB_USER2] FOR LOGIN [DB_USER2]
+EXEC sp_addrolemember N'db_owner', N'DB_USER2'
+CREATE USER [DB_USER1so] FOR LOGIN [DB_USER1so]
+EXEC sp_addrolemember N'db_owner', N'DB_USER1so'
 GO
 
 -- in the case where the user is orphaned, meaning it appears in the DB but not in the security-logins use this:
