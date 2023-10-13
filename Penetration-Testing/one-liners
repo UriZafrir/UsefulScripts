@@ -3,6 +3,7 @@ https://hackerone.com/bug-bounty-programs
 
 enumeration
 amass enum -d example.com -o results.txt
+amass enum -active -d example.com -p 80,443,8080 -o results-active.txt
 
 dorking
 https://github.com/opsdisk/pagodo
