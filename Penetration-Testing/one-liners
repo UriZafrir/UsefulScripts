@@ -1,3 +1,13 @@
+bug bounty
+https://hackerone.com/bug-bounty-programs
+
+enumeration
+amass enum -d example.com
+
+dorking
+https://github.com/opsdisk/pagodo
+python3 pagodo.py -d geeksforgeeks.org -g dorks/all_google_dorks.txt -p http://myproxy:8080,socks5h://127.0.0.1:9050,socks5h://127.0.0.1:9051 -s results.txt
+
 google search:
 intitle: "index of" "parent directory"
 https://www.exploit-db.com/google-hacking-database
