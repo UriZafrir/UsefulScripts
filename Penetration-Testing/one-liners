@@ -17,7 +17,11 @@ python3 ghdb_scraper.py -s -j -i
 python3 pagodo.py -d example.com -g dorks/all_google_dorks.txt -p http://myproxy:8080,socks5h://127.0.0.1:9050,socks5h://127.0.0.1:9051 -s results.txt
 
 google search:
-intitle: "index of" "parent directory"
+site:xxx.com intitle: "index of" "parent directory"
 https://www.exploit-db.com/google-hacking-database
 https://github.com/Proviesec/google-dorks
 https://github.com/opsdisk/pagodo/tree/master/dorks
+
+
+google search operators
+https://ahrefs.com/blog/google-advanced-search-operators/
