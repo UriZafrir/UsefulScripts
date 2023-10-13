@@ -2,7 +2,7 @@ bug bounty
 https://hackerone.com/bug-bounty-programs
 
 enumeration
-amass enum -d example.com
+amass enum -d example.com -o results.txt
 
 dorking
 https://github.com/opsdisk/pagodo
