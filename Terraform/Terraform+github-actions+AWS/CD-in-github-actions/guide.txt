@@ -1,0 +1,10 @@
+https://developer.hashicorp.com/terraform/tutorials/automation/github-actions
+uses this repo:
+https://github.com/hashicorp-education/learn-terraform-github-actions/blob/main/.github/workflows/terraform-plan.yml
+
+
+advantages are:
+infrastructure code is documented in git source control.
+pull review creates automatic "terraform plan" in terraform cloud.
+approval of the pull review creates the infrastructure in AWS.
+
